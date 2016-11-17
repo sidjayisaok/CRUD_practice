@@ -54,6 +54,7 @@ app.post('/quotes', (request, response)=>{
 
 //update/put request
 app.put('/quotes', (request, response)=>{
+    console.log(response);
     db.collections('quotes').findOneAndUpdate(
         //query part
         {
