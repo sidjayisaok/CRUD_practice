@@ -52,19 +52,18 @@ app.post('/quotes', (request, response)=>{
     });
 });
 
-//update/put request
+//update request not working yet
 app.put('/quotes', (request, response)=>{
-    console.log(response);
     db.collections('quotes').findOneAndUpdate(
         //query part
         {
-            name: 'Sid Jay'
+            name: 'UNK'
         },
         //update part
         {
             $set:{
-                name: req.body.name,
-                quote: req.body.quote
+                name: request.body.name,
+                quote: request.body.quote
             }   
         },
         //options part
@@ -78,5 +77,19 @@ app.put('/quotes', (request, response)=>{
             response.send(results)
         }
     )
+});
+
+//delete request not working yet
+app.delete('/quotes', (request, response)=>{
+    db.collections('quotes').findOneAndDelete(
+        //query part
+        {
+            name: request.body.name
+        },
+        //callback part
+        (error, results)=>{
+            if (error) return response.send(500, error)
+            response.send('deleted!')
+        })
 });
 
